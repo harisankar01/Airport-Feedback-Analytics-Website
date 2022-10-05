@@ -5,60 +5,15 @@ import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 import {CategoryScale} from 'chart.js'; 
 Chart.register(CategoryScale);
-export default class LineChart extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-        time_analyis:{
-          labels:[],
-          datasets:[]
-        }
-    }
-  }
-  componentDidMount() {
-    this.getdata();
-  }
-   getdata = async() => {
-      const res= await fetch("/api",{
-         method: 'GET',
-      }).then(r=>r.json())
-      
-    this.setState({ time_analyis: {
-    "labels": res?.time_analysis?.map((data) => {
-    if(data.overall_rating!=""){
-        return data.date
-      }
-    }),
-    "datasets": [
-      {
-        "label": "Rating timeline",
-        "data": res?.time_analysis?.map((data) => {
-          if(data.overall_rating!=""){
-            return data.overall_rating
-          }
-        }),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
-        ],
-        borderColor: "black",
-        borderWidth: 2,
-      },
-    ],
-  }
-});
-      console.log(res.time_analysis);
-   }
-  render(){
+
+const Line_Chart =({item})=>{
+ 
     return(
-      <Line data={this.state.time_analyis} />
+      <Line data={item} id={2}/>
     )
    }
-}
 
+// export default Line_Chart
 
 // const LineChart = () => {
 //   return (
@@ -120,4 +75,4 @@ export default class LineChart extends React.Component{
 //   )
 // }
 
-// export default LineChart
+export default Line_Chart
