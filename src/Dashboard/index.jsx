@@ -30,6 +30,11 @@ export default class DashboardApp extends Component {
       arrow:[]
     }
   }
+  setTickets=(val)=>{
+    this.setState({tickets:val});
+    console.log(this.state.tickets);
+    // this.state.tickets=val;
+  }
   componentDidMount() {
     this.getdata();
   }
@@ -96,12 +101,12 @@ export default class DashboardApp extends Component {
           </Grid>
           <Grid item xs={12} md={6} lg={8}>
             <Card key={12}>
-            <SimpleCloud  item={this.state.pos}/>
+            <SimpleCloud  item={this.state.pos} val={this.setTickets}/>
         </Card>
           </Grid>
           <Grid item xs={12} md={6} lg={8}>
             <Card key={12}>
-            <SimpleCloud  item={this.state.neg}/>
+            <SimpleCloud  item={this.state.neg} val={this.setTickets}/>
         </Card>
           </Grid>
          

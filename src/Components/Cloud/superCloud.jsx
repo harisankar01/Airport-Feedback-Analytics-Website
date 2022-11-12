@@ -1,18 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import { TagCloud } from 'react-tagcloud'
-const data = [
-  { value: 'JavaScript', count: 38 },
-  { value: 'React', count: 30 },
-  { value: 'Nodejs', count: 28 },
-  { value: 'Express.js', count: 25 },
-  { value: 'HTML5', count: 33 },
-  { value: 'MongoDB', count: 18 },
-  { value: 'CSS3', count: 20 },
-]
 
-const SimpleCloud = ({item}) => {
+
+const SimpleCloud = ({item,val}) => {
 const [values, setvalues] = useState([{}])
-console.log(item);
+const [index, setindex] = useState([])
+// console.log(item);
     useEffect(() => {
       setvalues(
         item?.map((i)=>({
@@ -20,6 +13,11 @@ console.log(item);
             count:Math.floor(Math.random() * 5)
         }))
       )
+      const temp=[];
+      item?.map((i,j)=>{
+        temp.push(j)
+      })
+      setindex(temp)
     }, [])
     const deliver_new= async(tag)=>{
         const res=await fetch("/api/comments",{
@@ -28,14 +26,14 @@ console.log(item);
             mode:"cors",
             headers: {"Content-type":"application/json;charset=utf-8"}
         }).then((r)=>r.json())
-        console.log(res);
+        val(res);
     }
     return(
   <TagCloud
     minSize={18}
     maxSize={40}
     tags={values}
-    key={values[Math.random(10)]}
+    key={index}
     onClick={(tag)=>deliver_new(tag.value)}
   />
 )

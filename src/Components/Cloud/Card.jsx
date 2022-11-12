@@ -2,7 +2,6 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
@@ -32,7 +31,7 @@ export default function Token({content,user_name,date,country,Rat}) {
   };
   console.log(Rat);
   return (
-    <Card sx={{ maxWidth: 800, maxHeight:500 }}>
+    <Card sx={{ minWidth:500, maxWidth: 1000, minHeight:500, maxHeight:1000 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

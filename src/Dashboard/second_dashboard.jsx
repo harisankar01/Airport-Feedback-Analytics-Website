@@ -50,6 +50,11 @@ class Ecommerce extends React.Component{
     componentDidMount() {
     this.getdata();
   }
+  setTickets=(val)=>{
+    this.setState({comments:val});
+    console.log(this.state.comments);
+  }
+
   getdata = async() =>{
    
 // const data_Set=[1,2,4,5,3,4,5,6]
@@ -294,7 +299,7 @@ render(){
           return(
           <div class="inline-flex static ml-4 justify-center w-1/7 max-w-xs" key={j}>
           <div class="rounded-lg shadow-lg bg-white max-w-s ">
-            <SimpleCloud val={j} item={i}/>
+            <SimpleCloud val={j} item={i} func={this.setTickets}/>
             <div class="p-4">
           <p className="text-xs cursor-pointer hover:drop-shadow-xl font-semibold rounded-lg w-80 bg-orange-400 py-1 px-2 text-gray-200 mt-10">
             Remark made on : {remark_on}
@@ -314,9 +319,9 @@ render(){
           <div className="flex justify-between">
             <p className="text-xl font-semibold">Tickets to be resolved</p>
           </div>
-          <div className="mt-10 flex flex-nowrap overflow-x-auto">
+          <div className="flex md:flex-row-reverse -mx-2 overflow-auto ">
             {this.state.comments.map((i,j)=>(
-              <div className="gap-2  p-3 m-1  rounded-2xl" key={j}>
+              <div className="inline-block  static gap-2 p-3 m-1 ml-auto rounded-2xl " key={j}>
               <Token content={i["content"]} user_name={i["user_name"]} date={i["date"]} country={i["user_country"]} Rat={i["rating"]} />
               </div>
             ))}
