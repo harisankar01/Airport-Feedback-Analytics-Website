@@ -52,7 +52,7 @@ export default function Token({content,user_name,date,country,Rat}) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Rating name="half-rating" defaultValue={`${Rat}`} precision={0.5} readOnly/>
+        <Rating name="half-rating" defaultValue={Rat} precision={0.5} readOnly/>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

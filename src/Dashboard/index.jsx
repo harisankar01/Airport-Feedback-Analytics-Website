@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import {Card} from '@mui/material';
+import {Card, CardContent} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
 import Page from '../Components/Utils/page';
-import Iconify from '../Components/Utils/iconify';
+import { Backdrop,CircularProgress } from '@mui/material';
 import Token from '../Components/Cloud/Card';
 import AppOrderTimeline from '../Components/Dashboard_comp/AppOrderTime';
 import Pie_Chart from '../Components/Pie';
@@ -22,6 +22,7 @@ export default class DashboardApp extends Component {
   constructor(props){
     super(props);
     this.state={
+      backdrop:false,
       senti:[],
       pos:[],
       neg:[],
@@ -38,8 +39,12 @@ export default class DashboardApp extends Component {
   componentDidMount() {
     this.getdata();
   }
+  handleClose=()=>{
+    this.setState({backdrop:false})
+  }
    getdata = async() =>{
-      const res= await fetch("/api/food",{
+    this.setState({backdrop:true})
+      const res= await fetch(`/api/${this.props.match.params.type}/${this.props.match.params.AirportName}`,{
          method: 'GET',
       }).then(r=>r.json())
 
@@ -47,6 +52,7 @@ export default class DashboardApp extends Component {
         tickets:res[3],arrow:res[4]
       })
       // console.log(this.state.words);
+      this.setState({backdrop:false})
    }
    render(){
       const theme = createTheme({
@@ -64,16 +70,23 @@ export default class DashboardApp extends Component {
 });
   return (
     <Page title="Dashboard">
+      <Backdrop
+  sx={{ color: '#fff', zIndex:5000 }}
+  open={this.state.backdrop}
+  onClick={this.handleClose}
+>
+  <CircularProgress color="inherit" />
+</Backdrop>
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Welcome to the food statistics of food in the {} aiport
+          Analytics of {this.props.match.params.type} in the {this.props.match.params.AirportName} aiport and its airlines
         </Typography>
 
         <Grid container spacing={3}>
           <Grid item xs={10} md={6} lg={4}>
             <Card>
           <Typography variant="h4" sx={{ mt: 6,ml:3 }}>
-            Sentimental Analysis of feedbacks
+            Sentimental Analysis of {this.props.match.params.type} reports
           </Typography>
           <div className="flex justify-center align-middle ">
               <ChartWrapperStyle>
@@ -94,30 +107,40 @@ export default class DashboardApp extends Component {
           <Grid item xs={12} md={6} lg={4}>
             <AppCurrentSubject
               title="Customer Statifaction comaprision"
-              chartLabels={['Value for money', 'recommend', 'rating']}
+              chartLabels={['Comparision Analysis']}
               chartData={this.state.arrow}
               chartColors={[...Array(3)].map(() => theme.palette.secondary.main)}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={8}>
-            <Card key={12}>
-            <SimpleCloud  item={this.state.pos} val={this.setTickets}/>
-        </Card>
+            <Card style={{borderRadius:20}}>
+              <CardContent>
+                <Typography variant="h4"  align="center">
+                Positive Cloud
+          </Typography>
+              </CardContent>
+            <SimpleCloud  item={this.state.pos} val={this.setTickets} airport={this.props.match.params.AirportName}/>
+            </Card>
           </Grid>
           <Grid item xs={12} md={6} lg={8}>
-            <Card key={12}>
-            <SimpleCloud  item={this.state.neg} val={this.setTickets}/>
-        </Card>
+            <Card style={{borderRadius:20}}>
+              <CardContent>
+          <Typography variant="h4" align="center">
+                Negative Cloud
+          </Typography>
+              </CardContent>
+            <SimpleCloud  item={this.state.neg} val={this.setTickets} airport={this.props.match.params.AirportName}/>
+            </Card>
           </Grid>
          
 
           
 
-          <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3 ">
+          <div className="overflow-auto bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3 ">
           <div className="flex justify-between">
             <p className="text-xl font-semibold">Tickets to be resolved</p>
           </div>
-          <div className="mt-10 flex flex-nowrap overflow-x-auto">
+          <div className="mt-10 flex flex-nowrap">
             {this.state.tickets.map((i,j)=>(
               <div className="gap-2  p-3 m-1  rounded-2xl" key={j}>
               <Token content={i["content"]} user_name={i["user_name"]} date={i["date"]} country={i["user_country"]} Rat={i["rating"]} />

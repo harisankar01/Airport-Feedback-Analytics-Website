@@ -2,8 +2,10 @@ import React from 'react';
 import { GiRocketFlight } from 'react-icons/gi';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import Button from "../Components/Utils/button"
+import { Link } from 'react-router-dom';
 import LineChart from "../Components/Charts/Line"
-import { earningData, medicalproBranding, recentTransactions, weeklyStats, dropdownData, SparklineAreaData, ecomPieChartData } from '../Components/Utils/data';
+import { Backdrop,CircularProgress } from '@mui/material';
+import { earningData, dropdownData, } from '../Components/Utils/data';
 import Pie_Chart from '../Components/Pie';
 import Line_Chart from '../Components/Line';
 import  Bar_Chart  from '../Components/BarChart';
@@ -12,7 +14,6 @@ import TripleBar from '../Components/Charts/double_bar';
 import SimpleCloud from '../Components/Cloud';
 import jsPDF from "jspdf"
 import Token from '../Components/Cloud/Card';
-import html2canvas from 'html2canvas';
 const DropDown = ({ currentMode }) => (
   <div className="w-28 border-1 border-color px-2 py-1 rounded-md">
     <DropDownListComponent id="time" fields={{ text: 'Time', value: 'Id' }} style={{ border: 'none', color: (currentMode === 'Dark') && 'white' }} value="1" dataSource={dropdownData} popupHeight="220px" popupWidth="120px" />
@@ -23,6 +24,8 @@ class Ecommerce extends React.Component{
     
     constructor(props)    {
         super(props)
+        console.log(this.props.match.params.AirportName);
+        // console.log();
         const labels = ['Queing', 'Cleaness', 'Seating', 'Signs ', 'Food', 'Shopping', 'Wi-fi','Staff'];
             const data = {
   labels,
@@ -35,10 +38,12 @@ class Ecommerce extends React.Component{
   ],
 };
       this.state={
+        backdrop:false,
             time_analyis:{
           labels:[],
           datasets:[]
         },
+        coordinates:{},
         reviews_arr:data,
         sentiment:[],
         image:"",
@@ -50,22 +55,29 @@ class Ecommerce extends React.Component{
     componentDidMount() {
     this.getdata();
   }
+
+  handleClose=()=>{
+    this.setState({backdrop:false})
+  }
   setTickets=(val)=>{
     this.setState({comments:val});
     console.log(this.state.comments);
   }
 
   getdata = async() =>{
+    this.setState({backdrop:true})
    
 // const data_Set=[1,2,4,5,3,4,5,6]
 ////////////////////////
-    const res= await fetch("/api",{
+    const res= await fetch(`/api/rating/${this.props.match.params.AirportName}`,{
          method: 'GET',
       }).then(r=>r.json())
       // console.log(res);
        const labels = ['Queing', 'Cleaness', 'Seating', 'Signs ', 'Food', 'Shopping', 'Wi-fi','Staff'];
 /////
-
+      this.setState({
+        coordinates:res["coors"]
+      })
       this.setState({reviews_arr: {
     labels,
     datasets: [
@@ -107,7 +119,7 @@ class Ecommerce extends React.Component{
 });
 ////////////
 this.setState({ sentiment: res.sentiment,image:res.image,comments:res.tickets});
-const keys= await fetch("/api/keywords",{
+const keys= await fetch(`/api/keywords/${this.props.match.params.AirportName}`,{
          method: 'GET',
       }).then(r=>r.json())
   this.setState({keywords:keys})
@@ -146,23 +158,19 @@ const barCustomSeries = barChartData?.map((i,j)=>(
   }
 ))
 this.setState({series:barCustomSeries});
+this.setState({backdrop:false})
 }
 
 render(){
-    const getPDf=()=>{
-      const val=document.getElementById("root")
-      html2canvas(val,{logging:true,letterRendering:true,useCORS:true}).then((canvas)=>{
-      const w=208;
-      const imgh=canvas.height * w/canvas.width
-      const imgd=canvas.toDataURL("image/png")
-      const pdf=new jsPDF("p","mm","a4")
-      pdf.addImage(imgd,"PNG",0,0,w,imgh)
-      pdf.save("report.png")
-      })
-      
-  }
   return (
     <div className="bg-zinc-100" id='1'>
+      <Backdrop
+  sx={{ color: '#fff', zIndex:5000 }}
+  open={this.state.backdrop}
+  onClick={this.handleClose}
+>
+  <CircularProgress color="inherit" />
+</Backdrop>
       <div className="flex flex-wrap lg:flex-nowrap justify-center ">
         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
           <div className="flex justify-between items-center">
@@ -183,7 +191,6 @@ render(){
               color="white"
               bgColor={"#03C9D7"}
               text="Download"
-              onClick={()=>getPDf()}
               borderRadius="10px"
             />
           </div>
@@ -191,6 +198,7 @@ render(){
         <div className="flex m-3 flex-wrap justify-center items-center">
           {earningData.map((item,j) => (
             <div key={j} className="bg-white ml-17 flex h-44 justify-center flex-wrap items-center dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
+              <Link to={`/category/${item.Link}/${this.props.match.params.AirportName}`}>
               <button
                 type="button"
                 style={{ color: item.iconColor, backgroundColor: item.iconBg }}
@@ -198,6 +206,7 @@ render(){
               >
                 {item.icon}
               </button>
+              </Link>
               <p className="mt-3">
                 <span className="text-lg font-bold ml-2">{item.title}</span>
               </p>
@@ -245,7 +254,7 @@ render(){
             <p className="text-xl font-semibold">Map Location</p>
           </div>
           <div className="mt-10 w-72 md:w-400">
-            <MapChart/>
+            <MapChart data={this.state.coordinates}/>
           <div className="flex-auto flex-col align-middle justify-center ">
             <p className="text-red-400  text-2xl">Airport Location: </p>
             <p className="text-blue-400 text-2xl">Chennai</p>
@@ -258,7 +267,7 @@ render(){
         </div>
       </div>
 
-      <div className="bg-emerald-50 dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-780">
+      <div className="bg-emerald-50 dark:text-gray-200 dark:bg-secondary-dark-bg  m-3 p-4 rounded-2xl md:w-780">
           <div className="flex justify-between">
             <p className="text-xl font-bold text-red-400">Overall Rating Timeleine</p>
             </div>
@@ -270,13 +279,13 @@ render(){
           </div>
         </div>
         <div>
-        <div className="overflow-x-auto bg-white  w-[200rem] dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
+        <div className=" bg-white   dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
           <div className="mb-10  ">
             <p className="text-2xl w-[76rem] inline-flex align-middle  justify-center cursor-pointer hover:drop-shadow-xl font-bold rounded-lg   bg-orange-400 py-0.5 px-2 text-gray-200 mt-10">
-              Improvemtns and remarks
+              Improvements and remarks
             </p>
           </div>
-          <div className="flex grow gap-10 flex-row overflow-x-auto ">
+          <div className="flex grow gap-10 flex-row overflow-auto">
         {this.state.keywords.map((i,j)=>{
           const feautures = ["airport", "terminal", "check in","security", "queue", "experience", "toilets", "shop"]
           const details={
@@ -297,15 +306,15 @@ render(){
             }
           }
           return(
-          <div class="inline-flex static ml-4 justify-center w-1/7 max-w-xs" key={j}>
-          <div class="rounded-lg shadow-lg bg-white max-w-s ">
-            <SimpleCloud val={j} item={i} func={this.setTickets}/>
-            <div class="p-4">
+          <div className="inline-flex static ml-4 justify-center w-1/7 max-w-xs " key={j}>
+          <div className="rounded-lg shadow-lg bg-white max-w-s ">
+            <SimpleCloud val={j} item={i} func={this.setTickets} airport={this.props.match.params.AirportName}/>
+            <div className="p-4">
           <p className="text-xs cursor-pointer hover:drop-shadow-xl font-semibold rounded-lg w-80 bg-orange-400 py-1 px-2 text-gray-200 mt-10">
             Remark made on : {remark_on}
           </p>
-             <h5 class="text-gray-900 text-xl font-medium mb-2">{feautures[j]}</h5>
-             <p class="text-gray-700 text-base mb-4">
+             <h5 className="text-gray-900 text-xl font-medium mb-2">{feautures[j]}</h5>
+             <p className="text-gray-700 text-base mb-4">
             {details[feautures[j]]}
           </p>
           </div>

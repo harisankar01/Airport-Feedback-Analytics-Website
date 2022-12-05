@@ -5,18 +5,15 @@ import {
   Geography,
   Marker
 } from "react-simple-maps";
-
-const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"
-
-export default function MapChart() {
+import GeoJson from "./countries-110m.json"
+export default function MapChart({data}) {
   return (
     <ComposableMap projectionConfig={{
     scale: 1000,
     rotate: [0, 0, -10],
-    center:[80.169296,12.90001]
+    center:[data.long,data.lat]
   }}>
-      <Geographies geography={geoUrl}>
+      <Geographies geography={GeoJson}>
         {({ geographies }) =>
           geographies.map((geo) => (
             <Geography
@@ -33,7 +30,7 @@ export default function MapChart() {
           ))
         }
       </Geographies>
-      <Marker coordinates={[80.169296,12.90001]}> 
+      <Marker coordinates={[data.long,data.lat]}> 
         <circle r={8} fill="#F53" />
       </Marker>
     </ComposableMap>

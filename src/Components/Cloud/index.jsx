@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { TagCloud } from 'react-tagcloud'
 
 
-const SimpleCloud = ({val,item,func}) => {
+const SimpleCloud = ({val,item,func,airport}) => {
 const [values, setvalues] = useState([])
 const feautures = ["airport", "terminal", "check in","security", "queue", "experience", "toilets", "shop"]
     useEffect(() => {
@@ -22,7 +22,7 @@ const feautures = ["airport", "terminal", "check in","security", "queue", "exper
       )
     }, [])
     const deliver_new= async(tag)=>{
-        const res=await fetch("/api/comments",{
+        const res=await fetch(`/api/comments/${airport}`,{
             method:'POST',
             body:JSON.stringify({tag}),
             mode:"cors",
@@ -35,10 +35,9 @@ const feautures = ["airport", "terminal", "check in","security", "queue", "exper
     minSize={18}
     maxSize={40}
     tags={values}
-    key={12}
+    key={val}
     onClick={(tag)=>deliver_new(tag.value)}
   />
 )
 }
-    
 export default SimpleCloud;

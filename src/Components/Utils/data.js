@@ -585,8 +585,7 @@ export const links = [
 export const earningData = [
   {
     icon: <MdFastfood />,
-    amount: "39,354",
-    percentage: "-4%",
+    Link: "food",
     title: "Food and beverages",
     iconColor: "#03C9D7",
     iconBg: "#E5FAFB",
@@ -594,6 +593,7 @@ export const earningData = [
   },
   {
     icon: <GrLounge />,
+    Link: "lounge",
     amount: "4,396",
     percentage: "+23%",
     title: "Airport Lounge",
@@ -603,6 +603,7 @@ export const earningData = [
   },
   {
     icon: <GiWitchFlight />,
+    Link: "reviews",
     amount: "423,39",
     percentage: "+38%",
     title: "Flight and review",

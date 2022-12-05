@@ -6,6 +6,7 @@ import { styled } from '@mui/material/styles';
 import { Card, CardHeader } from '@mui/material';
 // components
 import { BaseOptionChart } from '../Charts/basechart';
+import { useEffect } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -37,10 +38,20 @@ AppCurrentSubject.propTypes = {
 };
 
 export default function AppCurrentSubject({ title, subheader, chartData, chartColors, chartLabels, ...other }) {
+  useEffect(() => {
+    console.log(chartLabels);
+  }, [chartData])
+  
   const chartOptions = merge(BaseOptionChart(), {
     stroke: { width: 2 },
     fill: { opacity: 0.48 },
     legend: { floating: true, horizontalAlign: 'center' },
+    dropShadow: {
+                  enabled: true,
+                  blur: 1,
+                  left: 1,
+                  top: 1
+                },
     xaxis: {
       categories: chartLabels,
       labels: {

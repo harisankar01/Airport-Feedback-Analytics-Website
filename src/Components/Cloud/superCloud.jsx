@@ -2,25 +2,25 @@ import React,{useState,useEffect} from 'react'
 import { TagCloud } from 'react-tagcloud'
 
 
-const SimpleCloud = ({item,val}) => {
-const [values, setvalues] = useState([{}])
+const SimpleCloud = ({item,val,aiport}) => {
+const [values, setvalues] = useState([])
 const [index, setindex] = useState([])
 // console.log(item);
     useEffect(() => {
-      setvalues(
-        item?.map((i)=>({
+      const cloudValues= item?.map((i)=>({
             value:i,
             count:Math.floor(Math.random() * 5)
         }))
-      )
+      setvalues(cloudValues)
       const temp=[];
       item?.map((i,j)=>{
         temp.push(j)
       })
       setindex(temp)
-    }, [])
+      console.log(index);
+    }, [item])
     const deliver_new= async(tag)=>{
-        const res=await fetch("/api/comments",{
+        const res=await fetch(`/api/comments/${aiport}`,{
             method:'POST',
             body:JSON.stringify({tag}),
             mode:"cors",

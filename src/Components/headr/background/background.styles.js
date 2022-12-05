@@ -1,17 +1,31 @@
 import styled from "styled-components";
 
+export const Search = styled.div`
+  border-left: 100px;
+  width: 100%;
+  position: absolute;
+  margin-top: 100px;
+  z-index: 200;
+  padding-left: 150px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
-
   .background {
+    position: sticky;
     height: 100%;
     img {
       width: 100%;
       filter: brightness(60%);
     }
   }
+
   .content {
     height: 100%;
     width: 100%;
@@ -19,6 +33,7 @@ export const Section = styled.section`
     top: 0;
     z-index: 3;
     text-align: center;
+    overflow: hidden;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -63,11 +78,11 @@ export const Glass = styled.div`
   color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 0.5rem;
-  h2{
+  h2 {
     margin-bottom: 30px;
     color: aqua;
   }
-  p{
+  p {
     font-size: 25px;
     color: #ebeb07;
   }
@@ -77,22 +92,22 @@ export const Glass = styled.div`
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 3px;
     line-height: 1.4em;
-    p{
+    p {
       font-size: 16px;
     }
-    h2{
+    h2 {
       margin-bottom: 10px;
       font-size: smaller;
     }
   }
 
-  @media only screen and (min-width: 1000px)  and (max-width: 1150px) {
+  @media only screen and (min-width: 1000px) and (max-width: 1150px) {
     width: 50vw;
     height: 40vh;
-     p{
+    p {
       font-size: 20px;
     }
-    h2{
+    h2 {
       margin-bottom: 20px;
       font-size: large;
     }
