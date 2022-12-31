@@ -16,7 +16,7 @@ export const Background=({children})=> {
   const [value, setvalue] = useState("")
   useEffect(() => {
     if(value){
-    const regex = new RegExp(`^${value}`, 'g');
+    const regex = new RegExp(`^${value}`, 'gi');
     const matchedSites = Airports.filter((airport) => airport.match(regex));
     // const leng=matchedSites.length % 5
     setresult(matchedSites)
