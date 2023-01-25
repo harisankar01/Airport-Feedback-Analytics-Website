@@ -46,7 +46,6 @@ export const Background=({children})=> {
     else{
       setresult([])
     }
-    console.log(result);
   }, [value])
 
   return (

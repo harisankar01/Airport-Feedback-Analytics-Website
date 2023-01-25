@@ -17,7 +17,7 @@
 
 ## Local Development
 
-- Just create a `.env` file with the backend URL named `REACT_APP_BACKEND_BASE_URL`.
+- Create a `.env` file with the backend URL named `REACT_APP_BACKEND_BASE_URL`.
 - Set up the backend. Please refer to the [backend repo](https://github.com/harisankar01/Airport-Feedback-Analytics-website-Backend) for instructions on setting up the backend.
 - Install the packages,
 

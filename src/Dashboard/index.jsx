@@ -29,7 +29,6 @@ export default class DashboardApp extends Component {
   }
   setTickets=(val)=>{
     this.setState({tickets:val});
-    console.log(this.state.tickets);
     // this.state.tickets=val;
   }
   componentDidMount() {
@@ -47,7 +46,6 @@ export default class DashboardApp extends Component {
       this.setState({senti:res[1],pos:res[0].pos_items,neg:res[0].neg_items,air_food:res[2],
         tickets:res[3],arrow:res[4]
       })
-      // console.log(this.state.words);
       this.setState({backdrop:false})
    }
    render(){

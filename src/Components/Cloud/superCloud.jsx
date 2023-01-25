@@ -17,7 +17,6 @@ const [index, setindex] = useState([])
         temp.push(j)
       })
       setindex(temp)
-      console.log(index);
     }, [item])
     const deliver_new= async(tag)=>{
         const res=await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/comments/${aiport}`,{

@@ -23,8 +23,7 @@ class Ecommerce extends React.Component{
     
     constructor(props)    {
         super(props)
-        console.log(this.props.match.params.AirportName);
-        // console.log();
+
         const labels = ['Queing', 'Cleaness', 'Seating', 'Signs ', 'Food', 'Shopping', 'Wi-fi','Staff'];
             const data = {
   labels,
@@ -60,7 +59,6 @@ class Ecommerce extends React.Component{
   }
   setTickets=(val)=>{
     this.setState({comments:val});
-    console.log(this.state.comments);
   }
 
   getdata = async() =>{
@@ -71,7 +69,6 @@ class Ecommerce extends React.Component{
     const res= await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/rating/${this.props.match.params.AirportName}`,{
          method: 'GET',
       }).then(r=>r.json())
-      // console.log(res);
        const labels = ['Queing', 'Cleaness', 'Seating', 'Signs ', 'Food', 'Shopping', 'Wi-fi','Staff'];
 /////
       this.setState({
@@ -123,7 +120,6 @@ const keys= await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/keywords/
       }).then(r=>r.json())
   this.setState({keywords:keys})
 const feautures = ["airport", "terminal", "check in","security", "queue", "experience", "toilets", "shop"]
-// console.log(keys[0]["airport"]);
   const barChartData = [
     keys?.map((i,j)=>({
       x:feautures[j],
@@ -138,7 +134,6 @@ const feautures = ["airport", "terminal", "check in","security", "queue", "exper
       y:i[feautures[j]]["neg"]
     }))
   ]
-  console.log(barChartData);
   const ll_i=["positive","neutal","negative"]
 const barCustomSeries = barChartData?.map((i,j)=>(
 {
