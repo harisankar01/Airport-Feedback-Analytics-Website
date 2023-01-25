@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Airport-Feedback-Analytics-Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- This website provides visualizations and analytics regarding the feedback provided by customers on airports and airlines around the world.
+- Interactive charts are used for a better understanding of the review analytics.
+- Creates tickets from bad reviews, that will be displayed to be resolved.
+- Filtering of tickets based on the word cloud.
+- Provides separate analytics on food at the airport and airlines, lounge in the airport, and flights from a specific airport.
 
-## Available Scripts
+> Visit the website at [airport-feedback-analytics-dashboard](https://airport-feedback-analytics-website.vercel.app)
 
-In the project directory, you can run:
+### Tech Stack
 
-### `npm start`
+- The front end is made with **React**.
+- The backend is made with the **Django** Framework.
+- **MongoDB** Atlas is being used as a database.
+- The deployment was automated with **vercel**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Local Development
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Just create a `.env` file with the backend URL named `REACT_APP_BACKEND_BASE_URL`.
+- Set up the backend. Please refer to the [backend repo](https://github.com/harisankar01/Airport-Feedback-Analytics-website-Backend) for instructions on setting up the backend.
+- Install the packages,
 
-### `npm test`
+```jsx!
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Run the server locally,
 
-### `npm run build`
+```jsx!
+npm run start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> Navigate to localhost:3000
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Screenshots
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Home page](./Screenshots/home.png?raw=true "Landing page")
 
-### `npm run eject`
+![Analytics page](./Screenshots/sentimental.png?raw=true "Sentimental Analysis")
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Analytics page](./Screenshots/location.png?raw=true "Location Analysis")
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Analytics page](./Screenshots/word_cloud.png?raw=true "Word Cloud Images")
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Analytics page](./Screenshots/tickets.png?raw=true "Tickets")
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![Lounge analytics page](./Screenshots/specific.png?raw=true "Specific analytics")
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Lounge analytics page](./Screenshots/arrow.png?raw=true "Specific analytics")
