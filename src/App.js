@@ -14,7 +14,6 @@ function App() {
         exact
         component={DashboardApp}
       />
-      {/* <Route path="/lounge/:AirportName" exact component={Lounge} /> */}
     </BrowserRouter>
   );
 }

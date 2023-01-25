@@ -35,16 +35,17 @@ npm run start
 
 # Screenshots
 
-![Home page](./Screenshots/home.png?raw=true "Landing page")
+![home](https://user-images.githubusercontent.com/90249023/214670956-fd085610-0dad-455a-b1f4-16e1475a542b.png)
 
-![Analytics page](./Screenshots/sentimental.png?raw=true "Sentimental Analysis")
+![sentimental](https://user-images.githubusercontent.com/90249023/214671066-ee12821a-5477-4798-954a-46184b18d25c.png)
+![location](https://user-images.githubusercontent.com/90249023/214671169-42b8da8c-bc67-46e3-add9-d3406e374c7c.png)
 
-![Analytics page](./Screenshots/location.png?raw=true "Location Analysis")
+![word_cloud](https://user-images.githubusercontent.com/90249023/214671270-49489eba-692c-44bf-846f-c1c4e0b42c15.png)
 
-![Analytics page](./Screenshots/word_cloud.png?raw=true "Word Cloud Images")
+![timeline](https://user-images.githubusercontent.com/90249023/214671527-31583957-05a8-4740-b74f-eb978b539ae8.png)
 
-![Analytics page](./Screenshots/tickets.png?raw=true "Tickets")
+![tickets](https://user-images.githubusercontent.com/90249023/214671339-388db29f-7a92-43d1-be81-0c99df1df845.png)
 
-![Lounge analytics page](./Screenshots/specific.png?raw=true "Specific analytics")
+![specific](https://user-images.githubusercontent.com/90249023/214671564-815b38b5-d882-43a7-9277-643cef6eb64e.png)
 
-![Lounge analytics page](./Screenshots/arrow.png?raw=true "Specific analytics")
+![arrow](https://user-images.githubusercontent.com/90249023/214671358-762b81b1-7fc0-4219-b815-a07d2209ec7f.png)
