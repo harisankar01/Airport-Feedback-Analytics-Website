@@ -20,7 +20,7 @@ const [index, setindex] = useState([])
       console.log(index);
     }, [item])
     const deliver_new= async(tag)=>{
-        const res=await fetch(`/api/comments/${aiport}`,{
+        const res=await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/comments/${aiport}`,{
             method:'POST',
             body:JSON.stringify({tag}),
             mode:"cors",

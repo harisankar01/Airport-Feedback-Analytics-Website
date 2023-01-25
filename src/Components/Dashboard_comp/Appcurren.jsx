@@ -8,11 +8,6 @@ import { Card, CardHeader } from '@mui/material';
 import { BaseOptionChart } from '../Charts/basechart';
 import { useEffect } from 'react';
 
-// ----------------------------------------------------------------------
-
-const CHART_HEIGHT = 392;
-
-const LEGEND_HEIGHT = 72;
 
 export const ChartWrapperStyle = styled('div')(() => ({
   height: 393,

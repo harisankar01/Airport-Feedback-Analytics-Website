@@ -7,8 +7,30 @@ import {Link} from "react-router-dom"
 import SearchIcon from '@mui/icons-material/Search';
 import {Airports} from "../data"
 import { useState,useEffect } from "react";
-import { styled } from '@mui/material/styles';
+import { styled,alpha } from '@mui/material/styles';
+import SimpleBarReact from 'simplebar-react';
 
+
+const SimpleBarStyle = styled(SimpleBarReact)(({ theme }) => ({
+  maxHeight: '100%',
+  '& .simplebar-scrollbar': {
+    '&:before': {
+      backgroundColor: alpha(theme.palette.grey[600], 0.48),
+    },
+    '&.simplebar-visible:before': {
+      opacity: 1,
+    },
+  },
+  '& .simplebar-track.simplebar-vertical': {
+    width: 10,
+  },
+  '& .simplebar-track.simplebar-horizontal .simplebar-scrollbar': {
+    height: 6,
+  },
+  '& .simplebar-mask': {
+    zIndex: 'inherit',
+  },
+}));
 
 
 export const Background=({children})=> {
@@ -32,7 +54,6 @@ export const Background=({children})=> {
       <Search>
         <Box
       sx={{
-        // '& > :not(style)': { m: 1, width: '25ch' },
         boxShadow: `rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px`,
         border:"none",
         borderRadius:5,
@@ -59,9 +80,9 @@ export const Background=({children})=> {
                 }}
                 style={{
                 margin: "0 0 0 0",
-                width:400,
+                width:"40vw",
                 backgroundColor:"transparent",
-                color:"black",
+                color:"red",
               }}
                 onChange={(e)=>{setvalue(e.target.value)}}
                 InputProps={{
@@ -84,20 +105,18 @@ export const Background=({children})=> {
             The webiste provides multiple infernce on the experiacne of users using multiple airports over the world 
           </p>
           </Glass>
-
           {result && (
           <Box style={{
                 display: "inline-flex",
-                height: 300,
+                height: "40vh",
                 flex: 0.7,
                 padding: 30,
-                // scrollbarWidth:"thin",
-                // scrollbarColor:"#fcfae6",
                 flexGrow:0.7,
                 flexDirection: "column",
-                marginLeft: 50,
                 overflowY: "auto"
-          }}>
+          }}
+          >
+            <SimpleBarStyle timeout={500} clickOnTrack={false} sx={{overflowY: 'auto'}} >
             {result.map((airport)=>{
               return(
                 <Link to={`/overall/${airport}`}>
@@ -115,6 +134,7 @@ export const Background=({children})=> {
           </Link>
               )
             })}
+            </SimpleBarStyle>
           </Box>
           )}
       </div>

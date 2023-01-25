@@ -3,8 +3,7 @@ import merge from 'lodash/merge';
 import ReactApexChart from 'react-apexcharts';
 // @mui
 import { Box, Card, CardHeader } from '@mui/material';
-// utils
-import { fNumber } from '../Utils/formatnumber';
+
 // components
 import { BaseOptionChart } from '../Charts/basechart';
 
@@ -24,12 +23,7 @@ export default function AppConversionRates({ title, subheader, chartData, ...oth
   const chartOptions = merge(BaseOptionChart(), {
     tooltip: {
       marker: { show: false },
-      y: {
-        formatter: (seriesName) => fNumber(seriesName),
-        title: {
-          formatter: () => '',
-        },
-      },
+      
     },
     plotOptions: {
       bar: { horizontal: true, barHeight: '28%', borderRadius: 2 },

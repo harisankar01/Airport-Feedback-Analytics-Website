@@ -3,7 +3,6 @@ import { GiRocketFlight } from 'react-icons/gi';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import Button from "../Components/Utils/button"
 import { Link } from 'react-router-dom';
-import LineChart from "../Components/Charts/Line"
 import { Backdrop,CircularProgress } from '@mui/material';
 import { earningData, dropdownData, } from '../Components/Utils/data';
 import Pie_Chart from '../Components/Pie';
@@ -69,7 +68,7 @@ class Ecommerce extends React.Component{
    
 // const data_Set=[1,2,4,5,3,4,5,6]
 ////////////////////////
-    const res= await fetch(`/api/rating/${this.props.match.params.AirportName}`,{
+    const res= await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/rating/${this.props.match.params.AirportName}`,{
          method: 'GET',
       }).then(r=>r.json())
       // console.log(res);
@@ -119,7 +118,7 @@ class Ecommerce extends React.Component{
 });
 ////////////
 this.setState({ sentiment: res.sentiment,image:res.image,comments:res.tickets});
-const keys= await fetch(`/api/keywords/${this.props.match.params.AirportName}`,{
+const keys= await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/keywords/${this.props.match.params.AirportName}`,{
          method: 'GET',
       }).then(r=>r.json())
   this.setState({keywords:keys})
@@ -217,11 +216,11 @@ render(){
       </div>
 
       <div className="flex flex-wrap justify-between">
-        <div className="bg-white dark:text-gray-200 w-3/5 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-780  ">
+        <div className="bg-white dark:text-gray-200 w-3/5 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-780 ">
           <div className="flex">
             <p className="font-bold text-xl">Airport Ratings</p>
           </div>
-          <div className="mt-10 flex gap-10">
+          <div className="mt-10 flex gap-10 ">
             <Bar_Chart item={this.state.reviews_arr}/>
         </div>
         </div>

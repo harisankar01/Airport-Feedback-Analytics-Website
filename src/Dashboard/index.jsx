@@ -5,11 +5,7 @@ import { Grid, Container, Typography } from '@mui/material';
 import Page from '../Components/Utils/page';
 import { Backdrop,CircularProgress } from '@mui/material';
 import Token from '../Components/Cloud/Card';
-import AppOrderTimeline from '../Components/Dashboard_comp/AppOrderTime';
 import Pie_Chart from '../Components/Pie';
-import AppWebsiteVisits from '../Components/Dashboard_comp/AppVisits';
-import AppTrafficBySite from '../Components/Dashboard_comp/AppTraffic';
-import AppWidgetSummary from '../Components/Dashboard_comp/AppWidget';
 import AppCurrentSubject from '../Components/Dashboard_comp/Appcurren';
 import AppConversionRates from '../Components/Dashboard_comp/AppCoversion';
 import { Component } from 'react';
@@ -44,7 +40,7 @@ export default class DashboardApp extends Component {
   }
    getdata = async() =>{
     this.setState({backdrop:true})
-      const res= await fetch(`/api/${this.props.match.params.type}/${this.props.match.params.AirportName}`,{
+      const res= await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/${this.props.match.params.type}/${this.props.match.params.AirportName}`,{
          method: 'GET',
       }).then(r=>r.json())
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Search = styled.div`
-  border-left: 100px;
+  border-left: 50vw;
   width: 100%;
   position: absolute;
   margin-top: 100px;
@@ -14,14 +14,15 @@ export const Search = styled.div`
 `;
 
 export const Section = styled.section`
-  position: relative;
   width: 100%;
   height: 100%;
   .background {
     position: sticky;
     height: 100%;
+    object-fit: contain;
     img {
       width: 100%;
+      height: 100%;
       filter: brightness(60%);
     }
   }
@@ -29,7 +30,7 @@ export const Section = styled.section`
   .content {
     height: 100%;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: 3;
     text-align: center;
@@ -54,10 +55,11 @@ export const Section = styled.section`
     }
   }
   @media screen and (min-width: 280px) and (max-width: 980px) {
-    height: 25rem;
+    height: 50rem;
     .background {
-      background-color: palegreen;
+      height: 100%;
       img {
+        object-fit: cover;
         height: 100%;
       }
     }

@@ -22,7 +22,7 @@ const feautures = ["airport", "terminal", "check in","security", "queue", "exper
       )
     }, [])
     const deliver_new= async(tag)=>{
-        const res=await fetch(`/api/comments/${airport}`,{
+        const res=await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/api/comments/${airport}`,{
             method:'POST',
             body:JSON.stringify({tag}),
             mode:"cors",
